@@ -43,4 +43,22 @@ public class UserController {
         userDAO.save(person);
         return "redirect:/";
     }
+
+    @GetMapping("/edit/{id}")
+    public String edit(Model model, @PathVariable("id") int id) {
+        model.addAttribute("user", userDAO.show(id));
+        return "edit";
+    }
+
+    @PatchMapping("/{id}")
+    public String update(@ModelAttribute("person") User user, @PathVariable("id") int id) {
+        userDAO.update(id, user);
+        return "redirect:/";
+    }
+
+    @DeleteMapping("/{id}")
+    public String delete(@PathVariable("id") int id) {
+        userDAO.delete(id);
+        return "redirect:/";
+    }
 }
