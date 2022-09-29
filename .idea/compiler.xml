@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="pp231_my" />
+        <module name="pp231" />
         <module name="spring-crud-app3" />
       </profile>
     </annotationProcessing>

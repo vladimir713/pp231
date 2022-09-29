@@ -1,13 +1,23 @@
 package ru.pp231.models;
 
+import javax.persistence.*;
+
 /**
  * @author Vladimir Chugunov
  */
+@Entity
+@Table(name = "users")
 public class User {
+
+    @Id
+    @Column
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @Column
     private String name;
 
-
+    @Column
     private int age;
 
     public User() {
