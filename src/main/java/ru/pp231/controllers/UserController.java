@@ -15,22 +15,22 @@ import ru.pp231.services.UserService;
 @RequestMapping("/")
 public class UserController {
 
-    private final UserService userService;
+    private final UserDAO userDAO;
 
     @Autowired
-    public UserController(UserService userService) {
-        this.userService = userService;
+    public UserController(UserDAO userDAO) {
+        this.userDAO = userDAO;
     }
 
     @GetMapping()
     public String index(Model model) {
-        model.addAttribute("users", userService.index());
+        model.addAttribute("users", userDAO.index());
         return "index";
     }
 
     @GetMapping("/{id}")
     public String show(@PathVariable("id") int id, Model model) {
-        model.addAttribute("user", userService.show(id));
+        model.addAttribute("user", userDAO.show(id));
         return "show";
     }
 
@@ -41,25 +41,25 @@ public class UserController {
 
     @PostMapping()
     public String create(@ModelAttribute("user") User person) {
-        userService.save(person);
+        userDAO.save(person);
         return "redirect:/";
     }
 
     @GetMapping("/edit/{id}")
     public String edit(Model model, @PathVariable("id") int id) {
-        model.addAttribute("user", userService.show(id));
+        model.addAttribute("user", userDAO.show(id));
         return "edit";
     }
 
     @PatchMapping("/{id}")
     public String update(@ModelAttribute("person") User user, @PathVariable("id") int id) {
-        userService.update(id, user);
+        userDAO.update(id, user);
         return "redirect:/";
     }
 
     @DeleteMapping("/{id}")
     public String delete(@PathVariable("id") int id) {
-        userService.delete(id);
+        userDAO.delete(id);
         return "redirect:/";
     }
 }

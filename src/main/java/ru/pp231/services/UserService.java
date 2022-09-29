@@ -1,18 +1,37 @@
 package ru.pp231.services;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import ru.pp231.models.User;
-
+import ru.pp231.models.UserRepository;
+import javax.transaction.Transactional;
 import java.util.List;
 
-public interface UserService {
+@Service
+@Transactional
+public class UserService {
 
-    public List<User> index();
+    @Autowired
+    UserRepository repo;
 
-    public void save(User user);
+    public List<User> index() {
+        return (List<User>) repo.findAll();
+    }
 
-    public void delete(int id);
+    public void save(User user) {
+        repo.save(user);
+    }
 
-    public User show(int id);
+    public void delete(int id) {
+        repo.delete(id);
+    }
 
-    public void update(int id, User user);
+    public User show(int id) {
+        return repo.findOne(id);
+    }
+
+   public void update(int id, User user) {
+        repo.save(user);
+    }
+
 }
