@@ -3,16 +3,18 @@ package ru.pp231.services;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import ru.pp231.dao.UserDAO;
-import ru.pp231.dao.UserDAOImplHibernate;
 import ru.pp231.models.User;
 
 import javax.transaction.Transactional;
 import java.util.List;
 
-@Service
+@Component
 public class UserServicesImpl implements UserService {
 
-    UserDAO userDAO = new UserDAOImplHibernate();
+    private final UserDAO userDAO;
+    public UserServicesImpl(UserDAO userDAO) {
+        this.userDAO = userDAO;
+    }
 
     @Transactional
     @Override

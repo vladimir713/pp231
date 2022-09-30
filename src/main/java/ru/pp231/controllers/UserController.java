@@ -1,10 +1,10 @@
 package ru.pp231.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import ru.pp231.dao.UserDAO;
 import ru.pp231.models.User;
 import ru.pp231.services.UserService;
 
@@ -17,9 +17,8 @@ public class UserController {
 
     private final UserService userService;
 
-    @Autowired
-    public UserController(UserService userService) {
-        this.userService = userService;
+    public UserController(UserService userServices) {
+        this.userService = userServices;
     }
 
     @GetMapping()
