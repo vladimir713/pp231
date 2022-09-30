@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import ru.pp231.dao.UserDAO;
+//import ru.pp231.dao.UserDAO;
 import ru.pp231.models.User;
 import ru.pp231.services.UserService;
 
@@ -15,22 +15,22 @@ import ru.pp231.services.UserService;
 @RequestMapping("/")
 public class UserController {
 
-    private final UserDAO userDAO;
+    private final UserService userService;
 
     @Autowired
-    public UserController(UserDAO userDAO) {
-        this.userDAO = userDAO;
+    public UserController(UserService userService) {
+        this.userService = userService;
     }
 
     @GetMapping()
     public String index(Model model) {
-        model.addAttribute("users", userDAO.index());
+        model.addAttribute("users", userService.index());
         return "index";
     }
 
     @GetMapping("/{id}")
     public String show(@PathVariable("id") int id, Model model) {
-        model.addAttribute("user", userDAO.show(id));
+        model.addAttribute("user", userService.show(id));
         return "show";
     }
 
@@ -41,25 +41,25 @@ public class UserController {
 
     @PostMapping()
     public String create(@ModelAttribute("user") User person) {
-        userDAO.save(person);
+        userService.save(person);
         return "redirect:/";
     }
 
     @GetMapping("/edit/{id}")
     public String edit(Model model, @PathVariable("id") int id) {
-        model.addAttribute("user", userDAO.show(id));
+        model.addAttribute("user", userService.show(id));
         return "edit";
     }
 
     @PatchMapping("/{id}")
     public String update(@ModelAttribute("person") User user, @PathVariable("id") int id) {
-        userDAO.update(id, user);
+        userService.update(id, user);
         return "redirect:/";
     }
 
     @DeleteMapping("/{id}")
     public String delete(@PathVariable("id") int id) {
-        userDAO.delete(id);
+        userService.delete(id);
         return "redirect:/";
     }
 }

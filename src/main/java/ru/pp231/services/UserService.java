@@ -3,7 +3,7 @@ package ru.pp231.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.pp231.models.User;
-import ru.pp231.models.UserRepository;
+import ru.pp231.dao.UserRepository;
 import javax.transaction.Transactional;
 import java.util.List;
 
