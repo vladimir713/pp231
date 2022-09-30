@@ -1,5 +1,6 @@
 package ru.pp231.dao;
 
+import org.springframework.stereotype.Component;
 import ru.pp231.models.User;
 
 import java.util.List;
